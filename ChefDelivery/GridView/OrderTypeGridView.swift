@@ -19,7 +19,6 @@ struct OrderTypeGridView: View {
             }
         }
         .frame(height: 200)
-        .padding(.horizontal, 15)
         .padding(.top, 15)
     }
 }

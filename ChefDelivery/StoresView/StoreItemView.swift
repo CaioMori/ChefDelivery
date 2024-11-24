@@ -21,6 +21,10 @@ struct StoreItemView: View {
                 Text(order.name)
                     .font(.subheadline)
             }
+            Spacer()
+        }
+        .onTapGesture {
+            print("Order \(order.name) selected")
         }
     }
 }
