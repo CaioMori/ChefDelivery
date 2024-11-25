@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct StoreItemView: View {
-    let order: OrderType
+    let order: StoreType
     
     var body: some View {
         HStack {
-            Image(order.image)
+            Image(order.logoImage)
                 .resizable()
                 .scaledToFit()
                 .cornerRadius(25)
@@ -20,15 +20,14 @@ struct StoreItemView: View {
             VStack {
                 Text(order.name)
                     .font(.subheadline)
+                    .foregroundStyle(.colorRed)
+                    .fontWeight(.semibold)
             }
             Spacer()
-        }
-        .onTapGesture {
-            print("Order \(order.name) selected")
         }
     }
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    StoreItemView(order: OrderType(id: 1, name: "Monstro Burger", image: "monstro-burger-logo"))
+    StoreItemView(order: storesMock[0])
 }
