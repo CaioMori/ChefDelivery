@@ -94,3 +94,5 @@ let storesMock: [StoreType] = [
         ]
     ),
 ]
+
+let productMock: ProductType = ProductType(id: 6, name: "Pizza Margherita", description: "Pizza com molho de tomate, queijo mozzarella e manjericão", image: "margherita_pizza", price: 18.99)

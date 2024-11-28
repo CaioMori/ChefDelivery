@@ -49,30 +49,35 @@ struct StoreDetailView: View {
                 .font(.title2)
                 .bold()
                 .padding()
-            
+
             ScrollView {
                 ForEach(store.products) { product in
-                    HStack {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text(product.name)
-                                .bold()
-                            
-                            Text(product.description)
-                                .foregroundStyle(.black.opacity(0.5))
-                                .padding(.trailing)
-                            
-                            Text(product.formattedPrice)
+                    NavigationLink {
+                        ProductDetailView(product: product)
+                    } label: {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text(product.name)
+                                    .bold()
+                                
+                                Text(product.description)
+                                    .foregroundStyle(.black.opacity(0.5))
+                                    .padding(.trailing)
+                                    .multilineTextAlignment(.leading)
+                                
+                                Text(product.formattedPrice)
+                            }
+                            Spacer()
+                            Image(product.image)
+                                .resizable()
+                                .scaledToFit()
+                                .cornerRadius(12)
+                                .frame(width: 120, height: 120)
+                                .shadow(color: .black.opacity(0.3), radius: 20, x: 6, y: 8)
                         }
-                        Spacer()
-                        Image(product.image)
-                            .resizable()
-                            .scaledToFit()
-                            .cornerRadius(12)
-                            .frame(width: 120, height: 120)
-                            .shadow(color: .black.opacity(0.3), radius: 20, x: 6, y: 8)
+                        .padding()
+                        .foregroundStyle(.black)
                     }
-                    .padding()
-                    
                 }
             }
             .scrollIndicators(.hidden)
