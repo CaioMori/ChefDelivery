@@ -12,6 +12,7 @@ struct StoreDetailView: View {
     
     // Environment é o ambiente que uma view esta sendo exibida
     @Environment(\.presentationMode) var presentationMode
+    @State private var selectedProduct: ProductType?
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -52,8 +53,8 @@ struct StoreDetailView: View {
 
             ScrollView {
                 ForEach(store.products) { product in
-                    NavigationLink {
-                        ProductDetailView(product: product)
+                    Button {
+                        selectedProduct = product
                     } label: {
                         HStack {
                             VStack(alignment: .leading, spacing: 8) {
@@ -79,6 +80,7 @@ struct StoreDetailView: View {
                         .foregroundStyle(.black)
                     }
                 }
+            
             }
             .scrollIndicators(.hidden)
         }
@@ -98,6 +100,9 @@ struct StoreDetailView: View {
                     .foregroundStyle(.colorRed)
                     .bold()
                 }
+                .sheet(item: $selectedProduct) { product in
+                        ProductDetailView(product: product)
+                    }
             }
         }
     }
