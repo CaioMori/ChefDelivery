@@ -10,7 +10,7 @@ import SwiftUI
 struct StoreDetailProductsView: View {
     var products: [ProductType]
     
-    @State var selectedProduct: ProductType?
+    @State private var selectedProduct: ProductType?
     
     var body: some View {
         Text("Produtos")
