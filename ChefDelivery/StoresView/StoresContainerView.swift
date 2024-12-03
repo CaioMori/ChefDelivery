@@ -21,11 +21,16 @@ struct StoresContainerView: View {
                 Spacer()
                 
                 Menu("Filtrar") {
-                    ForEach(1...5, id: \.self) {star in
+                    ForEach(1...5, id: \.self) {rating in
                         Button {
-                            ratingFilter = star
+                            ratingFilter = rating
                         } label: {
-                            Text("\(star) estrelas ou mais")
+                            if (rating > 1){
+                                Text("\(rating) estrelas ou mais")
+                            } else {
+                                Text("\(rating) estrela ou mais")
+                            }
+                            
                         }
                     }
                 }
