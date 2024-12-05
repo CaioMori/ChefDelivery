@@ -18,7 +18,8 @@ struct ProductDetailView: View {
             
             Spacer()
             
-            ProductDetailQuantityView()
+            ProductDetailQuantityView(productQuantity: $productQuantity)
+        
             
             Spacer()
             
