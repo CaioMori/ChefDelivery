@@ -17,17 +17,17 @@ struct HomeView: View {
                 
                 Circle()
                     .foregroundStyle(Color("ColorRed"))
-                    .frame(width: 200)
+                    .frame(width: isAnimating ? 200 : 130)
                     .position(x: geometry.size.width - geometry.size.width * 0.9, y: geometry.size.height - geometry.size.height * 0.9)
-                    .blur(radius: 60)
-                    .opacity(0.5)
+                    .blur(radius: isAnimating ? 60 : 50)
+                    .opacity(isAnimating ? 0.5 : 0)
                 
                 Circle()
                     .foregroundStyle(Color("ColorRed"))
-                    .frame(width: 200)
+                    .frame(width: isAnimating ? 200 : 130)
                     .position(x: geometry.size.width - geometry.size.width * 0.3, y: geometry.size.height - geometry.size.height * 0.3)
-                    .blur(radius: 60)
-                    .opacity(0.5)
+                    .blur(radius: isAnimating ? 60 : 50)
+                    .opacity(isAnimating ? 0.5 : 0)
                 
                 VStack {
                     Text("Chef Delivery")
