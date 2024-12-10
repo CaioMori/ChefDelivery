@@ -45,7 +45,12 @@ struct HomeView: View {
                         .opacity(isAnimating ? 1 : 0)
                         .offset(y: isAnimating ? 0 : -40)
                     
-                    Spacer()
+                    Image("image")
+                        .resizable()
+                        .scaledToFit()
+                        .shadow(radius: 60)
+                        .padding(32)
+                        .gesture(DragGesture())
                 }
                 .onAppear {
                     withAnimation(.easeInOut(duration: 1.5)) {
