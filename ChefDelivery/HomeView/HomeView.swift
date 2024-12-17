@@ -11,13 +11,13 @@ struct HomeView: View {
     
     @State private var isAnimating: Bool = false
     @State private var imageOffset: CGSize = .zero
+    @State private var buttonOffset: CGFloat = 0
     
     let buttonHeight: CGFloat = 80
     
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                
                 Circle()
                     .foregroundStyle(Color("ColorRed"))
                     .frame(width: isAnimating ? 200 : 130)
@@ -101,6 +101,20 @@ struct HomeView: View {
                             }
                             Spacer()
                         }
+                        .offset(x: buttonOffset)
+                        .gesture(
+                            DragGesture()
+                                .onChanged({ gesture in
+                                    withAnimation(.easeInOut) {
+                                        buttonOffset = gesture.translation.width
+                                    }
+                                })
+                                .onEnded({ _ in
+                                    withAnimation(.easeInOut) {
+                                        buttonOffset = 0
+                                    }
+                                })
+                        )
                         
                         
                     }
