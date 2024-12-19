@@ -28,10 +28,13 @@ struct CarouselTabView: View {
         .tabViewStyle(.page(indexDisplayMode: .always))
         .onAppear {
             Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
-                if currentIndex >= orderMock.count {
-                    currentIndex = 1
+                
+                withAnimation(.easeInOut(duration: 1)) {
+                    if currentIndex > orderMock.count {
+                        currentIndex = 1
+                    }
+                    currentIndex += 1
                 }
-                currentIndex += 1
             }
         }
     }
