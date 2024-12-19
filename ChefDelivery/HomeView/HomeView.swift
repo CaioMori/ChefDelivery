@@ -86,6 +86,15 @@ struct HomeView: View {
                             .offset(x: 20)
                         
                         HStack {
+                            Capsule()
+                                .fill(Color.colorRed)
+                                .frame(width: buttonOffset + buttonHeight)
+                            
+                            Spacer()
+                            
+                        }
+                        
+                        HStack {
                             ZStack {
                                 Circle()
                                     .fill(Color.colorRed)
@@ -105,13 +114,23 @@ struct HomeView: View {
                         .gesture(
                             DragGesture()
                                 .onChanged({ gesture in
-                                    withAnimation(.easeInOut) {
-                                        buttonOffset = gesture.translation.width
+                                    
+                                    if (gesture.translation.width >= 0 && buttonOffset <= (geometry.size.width - 60) - buttonHeight) {
+                                        withAnimation(.easeInOut) {
+                                            buttonOffset = gesture.translation.width
+                                        }
                                     }
                                 })
                                 .onEnded({ _ in
-                                    withAnimation(.easeInOut) {
-                                        buttonOffset = 0
+                                    if  (buttonOffset > (geometry.size.width - 60) / 2){
+                                        withAnimation(.easeInOut) {
+                                            buttonOffset = (geometry.size.width - 60) - buttonHeight
+                                        }
+                                        // navegarte
+                                    } else {
+                                        withAnimation(.easeInOut) {
+                                            buttonOffset = 0
+                                    }
                                     }
                                 })
                         )
