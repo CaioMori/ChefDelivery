@@ -12,6 +12,7 @@ struct HomeView: View {
     @State private var isAnimating: Bool = false
     @State private var imageOffset: CGSize = .zero
     @State private var buttonOffset: CGFloat = 0
+    @State private var showSecondScreen: Bool = false
     
     let buttonHeight: CGFloat = 80
     
@@ -126,7 +127,9 @@ struct HomeView: View {
                                         withAnimation(.easeInOut) {
                                             buttonOffset = (geometry.size.width - 60) - buttonHeight
                                         }
-                                        // navegarte
+                                        
+                                        showSecondScreen = true
+
                                     } else {
                                         withAnimation(.easeInOut) {
                                             buttonOffset = 0
@@ -141,6 +144,8 @@ struct HomeView: View {
                         width: geometry.size.width - 60,
                         height: buttonHeight
                     )
+                    .opacity(isAnimating ? 1 : 0)
+                    .offset(y: isAnimating ? 0 : 100)
                     
                 }
                 .onAppear {
@@ -148,6 +153,9 @@ struct HomeView: View {
                         isAnimating = true
                     }
                 }
+            }
+            .fullScreenCover(isPresented: $showSecondScreen) {
+                ContentView()
             }
         }
     }
