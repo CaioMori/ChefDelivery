@@ -23,6 +23,23 @@ struct ContentView: View {
                 }
             }
         }
+        .onAppear {
+            fetchData()
+        }
+    }
+    
+    func fetchData() {
+        guard let ordersUrl = URL(string: "https://private-2f6f8b-caiomori.apiary-mock.com/order-types") else {
+            return
+        }
+        URLSession.shared.dataTask(with: ordersUrl) { data, _, error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let data = data {
+                print(data)
+            }
+        }
+        .resume()
     }
 }
 
