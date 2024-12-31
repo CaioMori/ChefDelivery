@@ -24,28 +24,10 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            fetchData()
         }
     }
     
-    func fetchData() {
-        guard let ordersUrl = URL(string: "https://private-2f6f8b-caiomori.apiary-mock.com/order-types") else {
-            return
-        }
-        URLSession.shared.dataTask(with: ordersUrl) { data, _, error in
-            if let error = error {
-                print(error.localizedDescription)
-            } else if let data = data {
-                do {
-                    let formattedData = try JSONSerialization.jsonObject(with: data) as? [[String: Any]]
-                    print(formattedData)
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-        }
-        .resume()
-    }
+    
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
