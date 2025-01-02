@@ -9,14 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     private let homeService = HomeService()
+    
     @State var storesResult: [StoreType] = []
+    @State var isLoading: Bool = true
     
     func getStores() async {
         do {
+            self.isLoading = true
             let result = try await homeService.fetchData()
             switch result {
             case .success(let stores):
                 self.storesResult = stores
+                print("storesResult atualizados:", self.storesResult)
                 break
             case .failure(let error):
                 print(error.localizedDescription)
@@ -24,20 +28,24 @@ struct ContentView: View {
         } catch {
             print(error.localizedDescription)
         }
-        
+        self.isLoading = false
     }
     
     var body: some View {
         NavigationView {
             VStack {
-                NavigationBar()
-                    .padding(.horizontal, 20)
-                    .padding(.top, 15)
-                ScrollView(.vertical, showsIndicators: false) {
-                    VStack(spacing: 20) {
-                        OrderTypeGridView()
-                        CarouselTabView()
-                        StoresContainerView()
+                if isLoading {
+                    ProgressView()
+                } else {
+                    NavigationBar()
+                        .padding(.horizontal, 20)
+                        .padding(.top, 15)
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack(spacing: 20) {
+                            OrderTypeGridView()
+                            CarouselTabView()
+                            StoresContainerView(availableStores: storesResult)
+                        }
                     }
                 }
             }
@@ -48,8 +56,6 @@ struct ContentView: View {
             }
         }
     }
-    
-    
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
