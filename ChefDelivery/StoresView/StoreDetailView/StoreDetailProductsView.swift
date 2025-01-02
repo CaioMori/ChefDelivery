@@ -22,12 +22,15 @@ struct StoreDetailProductsView: View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading) {
                 ForEach(products) { product in
-                    Button {
-                        selectedProduct = product
-                    } label: {
-                        StoreDetailProductItemView(product: product)
-                    }
-                }
+                                
+                                Button {
+                                    selectedProduct = product
+                                } label: {
+                                    StoreDetailProductItemView(product: product)
+                                }.sheet(item: $selectedProduct) { product in
+                                    ProductDetailView(product: product)
+                                }
+                            }
             }
         }
     }

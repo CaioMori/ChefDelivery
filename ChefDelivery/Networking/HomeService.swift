@@ -28,4 +28,22 @@ struct HomeService {
         
         return .success(storesObject)
     }
+    
+    func confirmOrder(product: ProductType) async throws -> Result<[String: Any]?, RequestError> {
+        guard let ordersUrl = URL(string: "https://private-2f6f8b-caiomori.apiary-mock.com/product") else {
+            return.failure(.invalidURL)
+        }
+        
+        let encodedProduct = try JSONEncoder().encode(product)
+        
+        var request = URLRequest(url: ordersUrl)
+        request.httpMethod = "POST"
+        request.httpBody = encodedProduct
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        
+        let responseObject = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+        
+        return .success(responseObject)
+    }
 }
