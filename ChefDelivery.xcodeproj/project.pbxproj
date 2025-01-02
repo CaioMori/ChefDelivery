@@ -6,6 +6,23 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FD83DD202D2710D6004D67DB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FD83DD1F2D2710D6004D67DB /* Alamofire */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FD83DD242D271C33004D67DB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		FD68508D2CF3A54500B1904E /* ChefDelivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChefDelivery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD83DD202D2710D6004D67DB /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -33,6 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				FD68508F2CF3A54500B1904E /* ChefDelivery */,
+				FD83DD252D271CF8004D67DB /* Frameworks */,
 				FD68508E2CF3A54500B1904E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -45,6 +64,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		FD83DD252D271CF8004D67DB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -55,6 +81,7 @@
 				FD6850892CF3A54500B1904E /* Sources */,
 				FD68508A2CF3A54500B1904E /* Frameworks */,
 				FD68508B2CF3A54500B1904E /* Resources */,
+				FD83DD242D271C33004D67DB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -65,6 +92,8 @@
 			);
 			name = ChefDelivery;
 			packageProductDependencies = (
+				FD83DD1F2D2710D6004D67DB /* Alamofire */,
+				FD83DD212D2710D6004D67DB /* AlamofireDynamic */,
 			);
 			productName = ChefDelivery;
 			productReference = FD68508D2CF3A54500B1904E /* ChefDelivery.app */;
@@ -94,6 +123,9 @@
 			);
 			mainGroup = FD6850842CF3A54500B1904E;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				FD83DD1E2D2710D6004D67DB /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FD68508E2CF3A54500B1904E /* Products */;
 			projectDirPath = "";
@@ -326,6 +358,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FD83DD1E2D2710D6004D67DB /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FD83DD1F2D2710D6004D67DB /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FD83DD1E2D2710D6004D67DB /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		FD83DD212D2710D6004D67DB /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FD83DD1E2D2710D6004D67DB /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FD6850852CF3A54500B1904E /* Project object */;
 }

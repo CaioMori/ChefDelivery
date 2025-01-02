@@ -13,21 +13,18 @@ struct ContentView: View {
     @State var storesResult: [StoreType] = []
     @State var isLoading: Bool = true
     
-    func getStores() async {
-        do {
+    func getStores() {
             self.isLoading = true
-            let result = try await homeService.fetchData()
-            switch result {
-            case .success(let stores):
-                self.storesResult = stores
-                print("storesResult atualizados:", self.storesResult)
-                break
-            case .failure(let error):
-                print(error.localizedDescription)
+            homeService.fetchDataWithAlamofire { stores, error in
+                if let stores {
+                    print(stores)
+                    self.storesResult = stores
+                } else {
+                    if let error {
+                        print(error.localizedDescription)
+                    }
+                }
             }
-        } catch {
-            print(error.localizedDescription)
-        }
         self.isLoading = false
     }
     
@@ -52,7 +49,7 @@ struct ContentView: View {
         }
         .onAppear {
             Task {
-                await getStores()
+                getStores()
             }
         }
     }

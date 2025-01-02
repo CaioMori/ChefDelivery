@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 enum RequestError: Error {
     case invalidURL
@@ -13,22 +14,6 @@ enum RequestError: Error {
 }
 
 struct HomeService {
-    func fetchData() async throws -> Result<[StoreType], RequestError> {
-        guard let ordersUrl = URL(string: "https://private-2f6f8b-caiomori.apiary-mock.com/stores") else {
-            return .failure(.invalidURL)
-        }
-        
-        var request = URLRequest(url: ordersUrl)
-        
-        request.httpMethod = "GET"
-        
-        let(data, _) = try await URLSession.shared.data(for: request)
-        
-        let storesObject = try JSONDecoder().decode([StoreType].self, from: data)
-        
-        return .success(storesObject)
-    }
-    
     func confirmOrder(product: ProductType) async throws -> Result<[String: Any]?, RequestError> {
         guard let ordersUrl = URL(string: "https://private-2f6f8b-caiomori.apiary-mock.com/product") else {
             return.failure(.invalidURL)
@@ -45,5 +30,17 @@ struct HomeService {
         let responseObject = try JSONSerialization.jsonObject(with: data) as? [String: Any]
         
         return .success(responseObject)
+    }
+    
+    func fetchDataWithAlamofire(completion: @escaping ([StoreType]?, Error?) -> Void) {
+        AF
+            .request("https://private-2f6f8b-caiomori.apiary-mock.com/stores")
+            .responseDecodable(of: [StoreType].self) { response in
+                switch response.result {
+                case .success(let stores):
+                    completion(stores, nil)
+                default: break
+                }
+            }
     }
 }
