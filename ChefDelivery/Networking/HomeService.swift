@@ -7,20 +7,25 @@
 
 import Foundation
 
+enum RequestError: Error {
+    case invalidURL
+    case errorRequest(error: String)
+}
+
 struct HomeService {
-    func fetchData() {
+    func fetchData() async throws -> Result<[StoreType], RequestError> {
         guard let ordersUrl = URL(string: "https://private-2f6f8b-caiomori.apiary-mock.com/stores") else {
-            return
+            return .failure(.invalidURL)
         }
         
-        URLSession.shared.dataTask(with: ordersUrl) { data, _, error in
-            if let error = error {
-                print(error.localizedDescription)
-            } else if let data = data {
-                let formattedStores = try? JSONDecoder().decode([StoreType].self, from: data)
-                print(formattedStores ?? "nada")
-            }
-        }
-        .resume()
+        var request = URLRequest(url: ordersUrl)
+        
+        request.httpMethod = "GET"
+        
+        let(data, _) = try await URLSession.shared.data(for: request)
+        
+        let storesObject = try JSONDecoder().decode([StoreType].self, from: data)
+        
+        return .success(storesObject)
     }
 }

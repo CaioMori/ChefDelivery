@@ -1,0 +1,28 @@
+# Arquivos de configuração do Xcode
+.DS_Store
+*.swp
+*.xcuserstate
+*.xccheckout
+*.moved-aside
+*.xcscmblueprint
+.idea/
+
+# Diretórios temporários
+build/
+DerivedData/
+
+# Arquivos de log
+*.log
+*.tmp
+*.lock
+
+# Swift Package Manager
+/.build/
+
+# Configurações específicas do desenvolvedor
+*.xcworkspace/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+
+# CocoaPods
+Pods/
